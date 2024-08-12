@@ -7,15 +7,20 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
     ports:
       - "9200:9200"
       - "9300:9300"
-
+    deploy:
+      resources:
+        limits:
+          memory: 2G
   ollama:
     image: ollama/ollama
     container_name: ollama
     volumes:
       - ollama:/root/.ollama
+      
     ports:
       - "11434:11434"
 
